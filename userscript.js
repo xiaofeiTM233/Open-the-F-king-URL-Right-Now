@@ -6,18 +6,24 @@
 // @match          http*://iphone.myzaker.com/zaker/link.php?*
 // @match          http*://link.zhihu.com/?*
 // @match          http*://t.cn/*
+// @match          http*://t.techlife.app/*
 // @match          http*://www.360doc.cn/outlink.html?url=*
 // @match          http://redir.yy.duowan.com/warning.php?url=*
 // @match          http://www.360doc.com/content/*
+// @match          https://*.infoq.cn/link?target=*
+// @match          https://aiqicha.baidu.com/safetip?target=*
+// @match          https://www.aiqicha.com/safetip?target=*
 // @match          https://afdian.com/link?target=*
 // @match          https://afdian.net/link?target=*
 // @match          https://api.himcbbs.com/refer/?url=*
 // @match          https://ask.latexstudio.net/go/index?url=*
+// @match          https://atcoder.jp/jump?url=*
 // @match          https://bbs.acgrip.com/*
 // @match          https://bbs.nga.cn/read.php?*
 // @match          https://blog.51cto.com/transfer?*
 // @match          https://blzxteam.com/gowild.htm?url=*
 // @match          https://cloud.tencent.com/developer/tools/blog-entry?target=*
+// @match          https://cnb.cool/goto?url=*
 // @match          https://developers.weixin.qq.com/community/middlepage/href?href=*
 // @match          https://developer.aliyun.com/redirect?target=*
 // @match          https://docs.qq.com/scenario/link.html?u=*
@@ -28,7 +34,6 @@
 // @match          https://gitee.com/link?target=*
 // @match          https://hd.nowcoder.com/link.html?target=*
 // @match          https://hellogithub.com/periodical/statistics/click?target=*
-// @match          https://www.iplaysoft.com/link/?url=*
 // @match          https://jump2.bdimg.com/safecheck/index?url=*
 // @match          https://leetcode.cn/link/?target=*
 // @match          https://link.csdn.net/?*target=*
@@ -52,7 +57,6 @@
 // @match          https://steamcommunity.com/linkfilter/?u=*
 // @match          https://support.qq.com/product/*/link-jump?jump=*
 // @match          https://support.qq.com/products/*/link-jump?jump=*
-// @match          http*://t.techlife.app/*
 // @match          https://t.me/iv?url=*
 // @match          https://tieba.baidu.com/mo/q/checkurl?url=*
 // @match          https://txc.qq.com/product/*/link-jump?jump=*
@@ -60,7 +64,9 @@
 // @match          https://unsafelink.com/*
 // @match          https://weibo.cn/sinaurl?*
 // @match          https://weixin110.qq.com/cgi-bin/mmspamsupport-bin/newredirectconfirmcgi*
-// @match          https://wx.mail.qq.com/xmspamcheck/xmsafejump?*
+// @match          https://wj.qq.com/s2/*
+// @match          https://www.baike.com/redirect_link?url=*
+// @match          https://www.bilibili.com/york/link-middle-page*
 // @match          https://www.bookmarkearth.com/view/*
 // @match          https://www.chinaz.com/go.shtml?url=*
 // @match          https://www.coolapk.com/link?url=*
@@ -68,14 +74,15 @@
 // @match          https://www.douban.com/link2/?url=*
 // @match          https://www.gcores.com/link?target=*
 // @match          https://www.google.com/url?*
+// @match          https://www.iplaysoft.com/link/?url=*
 // @match          https://www.instagram.com/linkshim/?u=*
 // @match          https://www.jianshu.com/go-wild?*
 // @match          https://www.kdocs.cn/etapps/query/link?target=*
 // @match          https://www.kookapp.cn/go-wild.html?url=*
 // @match          https://www.linkedin.com/safety/go?url=*
+// @match          https://www.luogu.com.cn/article/*
 // @match          https://www.luogu.com.cn/discuss/*
 // @match          https://www.luogu.com.cn/paste/*
-// @match          https://www.luogu.com.cn/article/*
 // @match          https://www.mczwlt.net/go-external?url=*
 // @match          https://www.nodeseek.com/jump?to=*
 // @match          https://www.oschina.net/action/GoToLink?url=*
@@ -83,12 +90,12 @@
 // @match          https://www.qcc.com/web/transfer-link?link=*
 // @match          https://www.skland.com/third-link?target=*
 // @match          https://www.tianyancha.com/security?target=*
+// @match          https://www.xgw4.com/qqdl.html?url=*
 // @match          https://www.yuque.com/r/goto?url=*
-// @match          https://*.infoq.cn/link?target=*
-// @match          https://www.baike.com/redirect_link?url=*
 // @match          https://www.youtube.com/redirect?*
+// @match          https://wx.mail.qq.com/xmspamcheck/xmsafejump?*
 // @exclude        https://mp.weixin.qq.com/cgi-bin/*
-// @version        1.14.4
+// @version        1.14.7
 // @run-at         document-idle
 // @namespace      https://old-panda.com/
 // @require        https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js
@@ -104,9 +111,13 @@ const $ = jQuery.noConflict(true);
    */
 const fuckers = {
   acgrip: { match: 'https://bbs.acgrip.com/', redirect: removeFwinDialog },
+  aiqicha: { match: 'https://aiqicha.baidu.com/safetip?target=', redirect: "target" },
+  aiqicha_2: { match: 'https://www.aiqicha.com/safetip?target=', redirect: "target" },
   afdian: { match: 'https://afdian.net/link?target=', redirect: "target" },
   afdian2: { match: 'https://afdian.com/link?target=', redirect: "target" },
+  atcoder: { match: 'https://atcoder.jp/jump?url=', redirect: "url" },
   baike: { match: 'https://www.baike.com/redirect_link?url=', redirect: "url" },
+  bilibiliYork: { match: 'https://www.bilibili.com/york/link-middle-page?', redirect: "redirect_url" },
   blzxteam: { match: 'https://blzxteam.com/gowild.htm?url=', redirect: function () { const url = $("div._2VEbEOHfDtVWiQAJxSIrVi_0").first().attr("title"); window.location.href = url } },
   bookmarkearth: { match: 'https://www.bookmarkearth.com/view/', redirect: function () { window.location.replace(document.querySelector("p.link").innerHTML) } },
   chinaz: { match: 'https://www.chinaz.com/go.shtml?url=', redirect: "url" },
@@ -114,6 +125,7 @@ const fuckers = {
   csdn: { match: 'https://link.csdn.net/?*target=', redirect: "target" },
   cto51: { match: 'https://blog.51cto.com/transfer?', redirect: function () { window.location.href = window.location.href.replace("https://blog.51cto.com/transfer?", "") } },
   curseforge: { match: 'https://www.curseforge.com/linkout?remoteUrl=', redirect: function () { redirect(decodeURIComponent(curURL), 'remoteUrl') } },
+  cnb: { match: 'https://cnb.cool/goto?url=', redirect: "url" },
   dilian: { match: 'https://link.ld246.com/forward?goto=', redirect: "goto" },
   developeraliyun: { match: 'https://developer.aliyun.com/redirect?target=', redirect: "target" },
   doc360_2: { match: 'http://www.360doc.cn/outlink.html?url=', redirect: "url" },
@@ -137,7 +149,7 @@ const fuckers = {
   kdocs: { match: 'https://www.kdocs.cn/etapps/query/link?target=', redirect: "target" },
   kook: { match: 'https://www.kookapp.cn/go-wild.html?url=', redirect: "url" },
   latexstudio: { match: 'https://ask.latexstudio.net/go/index?url=', redirect: "url" },
-  leetcode: { match: 'https://leetcode.cn/link/?target', redirect: "target" },
+  leetcode: { match: 'https://leetcode.cn/link/?target', redirect: function () { window.location.replace(curURL.split("target=").pop()) } },
   linkedin: { match: 'https://www.linkedin.com/safety/go?url=', redirect: "url" },
   logonews: { match: 'https://link.logonews.cn/?', redirect: "url" },
   luogu: { match: 'https://www.luogu.com.cn/paste/', redirect: function () { if (document.getElementById("url")) { window.location.href = $("#url").text() } } },
@@ -198,7 +210,9 @@ const fuckers = {
     }
   },
   weixindev: { match: 'https://developers.weixin.qq.com/community/middlepage/href?href=', redirect: "href" },
+  wj_qq: { match: 'https://wj.qq.com/s2/', redirect: function () { document.addEventListener("click", e => { if (e.target.className === "pe-link") e.stopPropagation() }, true) } },
   work_weixin: { match: 'https://open.work.weixin.qq.com/wwopen/uriconfirm?uri=', redirect: "uri" },
+  xgw4: { match: 'https://www.xgw4.com/qqdl.html?url=', redirect: function () { redirect(curURL, "url", true) } },
   yuque: { match: 'https://www.yuque.com/r/goto?url=', redirect: "url" },
   youtube: { match: 'https://www.youtube.com/redirect?', redirect: "q" },
   yy: { match: 'http://redir.yy.duowan.com/warning.php?url=', redirect: "url" },
@@ -342,15 +356,9 @@ function removeFwinDialog() {
 function redirect(fakeURLStr, trueURLParam, enableBase64 = false) {
   let fakeURL = new URL(fakeURLStr);
   let trueURL = fakeURL.searchParams.get(trueURLParam);
-  if (trueURL.startsWith(fuckers.wechat1.match)) {
-    // there could be multiple `&`s in url of a wechat link, so all of them
-    // have to be included in the trueURL.
-    trueURL = fakeURL.search.split(`${trueURLParam}=`).pop();
-  } else {
-    if (enableBase64) trueURL = window.atob(trueURL);
-    if (trueURL.indexOf("http://") !== 0 && trueURL.indexOf("https://") !== 0) {
-      trueURL = "https://" + trueURL;
-    }
+  if (enableBase64) trueURL = window.atob(trueURL);
+  if (trueURL.indexOf("http://") !== 0 && trueURL.indexOf("https://") !== 0) {
+    trueURL = "https://" + trueURL;
   }
   trueURL = decodeURIComponent(trueURL)
   window.location.replace(trueURL);
